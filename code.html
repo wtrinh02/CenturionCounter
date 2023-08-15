@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A Coding Project By Wesley Trinh</title>
+    <title>Centurion Counter: A Coding Project By Wesley Trinh</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,7 +23,7 @@
     <!-- ==== Nav Section ====-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/logoicon.png" class="d-inline-block align-text-top" width="30" height="24"> APP NAME</a>
+            <a class="navbar-brand logoFont" href="#"><img src="img/logoicon.png" class="d-inline-block align-text-top" width="30" height="24"> CENTURION COUNTER</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,21 +53,78 @@
     <!-- ==== Main Section ====-->
     <main class="flex-shrink-0">
         <div class="container py-5 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for Centurion Counter</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call hello World
-                        function HelloWorld(){
-                            alert("Hello World");
+                        //get the values from the page
+                        //starts or controller function
+                        function getValues(){
+                            //get values from  the page
+                            let startValue = document.getElementById("startValue").value;
+                            let endValue = document.getElementById("endValue").value;
+                            //parse into integers
+                            startValue= parseInt(startValue)
+                            endValue = parseInt(endValue)
+                        
+                        
+                            if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+                                 
+                                if(startValue > endValue){
+                                    alert("Start Value has to be less than or equal to end value");
+                                    return;
+                                }
+                        
+                                let numbers = generateNumbers(startValue, endValue)    
+                                 displayNumbers(numbers)
+                            }
+                            else{
+                                alert("You must enter integers!")
+                            }
+                        
+                        
+                        }
+                        //generate numbers from startValue to endValue
+                        //logic function(s)
+                        function generateNumbers(startValue, endValue){
+                            let numbers = [];
+                            for (let i = startValue; i <= endValue; i++) {
+                                numbers.push(i)
+                            }
+                            return numbers;
+                        }
+                        
+                        //display the numbers and mark even numbers bold
+                        //display or view functions
+                        function displayNumbers(numbers){
+                        
+                            let templateRows="";
+                            let className=";"
+                        
+                            for(let i = 0; i < numbers.length; i++){
+                                let number = numbers[i];
+                                if(number % 2 == 0){
+                                   className = "even";
+                                }
+                                else{
+                                    className = "odd";
+                                }
+                                //This doesn't render correctly with Prism see the Source code
+                                templateRows+= `<tr><td class="${className}">${number}</td></tr>`;
+                            }
+                            document.getElementById("results").innerHTML = templateRows;
                         }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code is structured in three functions.</p>
+                    <h5>getValues</h5>
+                    <p>getValues is the controller function of the coding challenge. The function gets the start and end values from the input of the page using the getElementById function to access the value of the input. getValues then parses the inputs into a number and checks if the inputs are valid. If so, it calls generateNumbers to create an array of numbers and uses the array to call displayNumbers to display the numbers in a table. Else an alert will pop up for an invalid input.</p>
+                    <h5>generateNumbers</h5>
+                    <p>generateNumbers is a function that takes the parameters of startValue and endValue. The function loops from startValue to endValue and adds all the numbers including and in between the two values into the numbers array.</p>
+                    <h5>displayNumbers</h5>
+                    <p>displayNumbers is a function that takes in an array of numbers. The function loops through the array and checks if the current number is even or odd by using the modulo(%) operator. If the number is even, the function sets the string className equal to even else className would be set to odd. After, during the loop, the function would add html elements to templateRows using backticks(`) to create table rows and table data with class even or odd with the number as data. </p>
                 </div>
             </div>
         </div>
@@ -107,6 +164,11 @@
             'right-trim': true
             })
     </script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Domine:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </body>
 
